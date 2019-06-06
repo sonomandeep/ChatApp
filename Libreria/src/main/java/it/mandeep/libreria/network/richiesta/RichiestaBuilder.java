@@ -9,5 +9,5 @@ public interface RichiestaBuilder extends Serializable {
     RichiestaBuilder buildMessaggio(Messaggio messaggio);
     RichiestaBuilder buildMittente(Utente mittente);
     RichiestaBuilder buildDestinatario(Utente destinatario);
-    Richiesta build(TipoRichiesta tipoRichiesta);
+    Richiesta build();
 }

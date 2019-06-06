@@ -8,13 +8,9 @@ import java.io.Serializable;
 public class Richiesta implements Serializable {
 
     private TipoRichiesta tipoRichiesta;
-    private Messaggio messaggio;
-    private Utente mittente;
-    private Utente destinatario;
-
-    public Richiesta(TipoRichiesta tipoRichiesta) {
-        this.tipoRichiesta = tipoRichiesta;
-    }
+    private Messaggio messaggio = null;
+    private Utente mittente = null;
+    private Utente destinatario = null;
 
     public TipoRichiesta getTipoRichiesta() {
         return tipoRichiesta;

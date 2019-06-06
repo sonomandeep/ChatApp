@@ -47,4 +47,8 @@ public class RequestThread extends Thread {
             }
         }
     }
+
+    public Risposta getRisposta() {
+        return risposta;
+    }
 }
