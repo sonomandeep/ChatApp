@@ -2,6 +2,9 @@ package it.mandeep.libreria.datastructures;
 
 import java.io.Serializable;
 
+/**
+ * La classe {@code Messaggio} rappresenta il messaggio che sarà inviato da un client ad un'altro.
+ */
 public class Messaggio implements Serializable {
 
     private String contenuto;

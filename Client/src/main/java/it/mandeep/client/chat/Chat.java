@@ -5,10 +5,17 @@ import it.mandeep.client.networking.Adress;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+/**
+ * La classe {@code Chat} serve per poter far connettere un altro client al client che possiede questa istanza,
+ * attraverso questa classe vengono gestite le richieste inviate dall'altro client.
+ */
 public class Chat {
 
     private ServerSocket server;
 
+    /**
+     * Unico costruttore che ha il compito di delegare alla classe {@link ChatHandler} l'elaborazione della richietsa.
+     */
     public Chat() {
         try {
             server = new ServerSocket(Adress.port);

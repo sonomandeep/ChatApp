@@ -1,15 +1,18 @@
 package it.mandeep.libreria.network.risposta;
 
 import it.mandeep.libreria.datastructures.Utente;
-import it.mandeep.libreria.network.Adress;
 
 import java.io.Serializable;
 
+/**
+ * La classe {@code Risposta} rappresenta il risultato dell'elaborazione di una {@link it.mandeep.libreria.network.richiesta.Richiesta}
+ * e viene restituita al mittente.
+ */
 public class Risposta implements Serializable {
 
     private int risultatoRisposta;
     private Utente utente;
-    private Adress adress;
+    private String adress;
 
     public Risposta(int risultatoRisposta) {
         this.risultatoRisposta = risultatoRisposta;
@@ -31,11 +34,11 @@ public class Risposta implements Serializable {
         this.utente = utente;
     }
 
-    public Adress getAdress() {
+    public String getAdress() {
         return adress;
     }
 
-    public void setAdress(Adress adress) {
+    public void setAdress(String adress) {
         this.adress = adress;
     }
 }

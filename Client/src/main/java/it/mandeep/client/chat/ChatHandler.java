@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+/**
+ * La classe {@code ChatHandler} gestisce le richieste inviate dal client che si connette.
+ */
 public class ChatHandler extends Thread {
 
     private Socket client;

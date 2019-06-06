@@ -5,6 +5,11 @@ import it.mandeep.libreria.datastructures.Utente;
 
 import java.io.Serializable;
 
+/**
+ * La classe {@code Richiesta} rappresenta il pacchetto che viene inviato
+ * da un socket ad un altro, contiene informazioni sul tipo di richietsa,
+ * sul come deve essere elaborata la risposta.
+ */
 public class Richiesta implements Serializable {
 
     private TipoRichiesta tipoRichiesta;

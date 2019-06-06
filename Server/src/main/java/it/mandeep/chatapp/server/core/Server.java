@@ -1,16 +1,20 @@
 package it.mandeep.chatapp.server.core;
 
-import it.mandeep.libreria.datastructures.Utente;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.Hashtable;
-import java.util.Map;
 
+/**
+ * La classe {@code Server} si occupa di ricevere le connessioni dai client.
+ */
 public class Server {
 
     private ServerSocket server;
 
+    /**
+     * Il costruttore mette il server in ascolto e quando si connette un client la sua gestione viene delegata
+     * ad un {@link ClientHandler}.
+     */
     public Server() {
         try {
             server = new ServerSocket(Adress.port);

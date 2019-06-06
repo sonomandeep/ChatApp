@@ -3,6 +3,9 @@ package it.mandeep.libreria.network.richiesta;
 import it.mandeep.libreria.datastructures.Messaggio;
 import it.mandeep.libreria.datastructures.Utente;
 
+/**
+ * La classe {@code ConcreteRichiestaBuilder} si occupa di creare una {@link Richiesta} seguendo il Builder Pattern.
+ */
 public class ConcreteRichiestaBuilder implements RichiestaBuilder {
 
     private TipoRichiesta tipoRichiesta = null;

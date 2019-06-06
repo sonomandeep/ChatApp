@@ -1,8 +1,10 @@
 package it.mandeep.libreria.datastructures;
 
 import java.io.Serializable;
-import java.util.Objects;
 
+/**
+ * La classe {@code Utente} rappresenta l'utilizzatore del programma.
+ */
 public class Utente implements Serializable {
 
     private int ID = 0;

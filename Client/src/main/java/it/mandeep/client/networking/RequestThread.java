@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
- * RequestThread
+ * La classe {@code RequestThread} serve per potersi connettere al server o ad un altro client per inviare richieste.
  */
 public class RequestThread extends Thread {
 
@@ -17,8 +17,12 @@ public class RequestThread extends Thread {
     private ObjectOutputStream out = null;
     private ObjectInputStream in = null;
     private Risposta risposta = null;
-    private Richiesta richiesta = null;
+    private Richiesta richiesta;
 
+    /**
+     * Costruttore che inizializza la richieta.
+     * @param richiesta {@code Richiesta} che sarà inviata.
+     */
     public RequestThread(Richiesta richiesta) {
         this.richiesta = richiesta;
     }

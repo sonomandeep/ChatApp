@@ -12,6 +12,9 @@ import java.net.Socket;
 import java.util.Hashtable;
 import java.util.Map;
 
+/**
+ * La classe {@code ClientHandler} si occupa di gestire le richieste che il server riceve.
+ */
 public class ClientHandler extends Thread {
 
     private Socket client;
