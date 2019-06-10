@@ -3,8 +3,6 @@ package it.mandeep.libreria.database;
 import java.util.List;
 
 public interface Dao<T> {
-    // Create table
-    void createTable();
     // Add
     void add(T t);
     // Read
