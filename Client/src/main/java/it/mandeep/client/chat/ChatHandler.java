@@ -1,6 +1,8 @@
 package it.mandeep.client.chat;
 
 import it.mandeep.libreria.datastructures.Messaggio;
+import it.mandeep.libreria.network.richiesta.Richiesta;
+import it.mandeep.libreria.network.risposta.Risposta;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,6 +17,8 @@ public class ChatHandler extends Thread {
     private Socket client;
     private ObjectOutputStream out;
     private ObjectInputStream in;
+    private Richiesta richeesta;
+    private Risposta risposta;
     private Messaggio messaggio;
 
     /**
@@ -39,7 +43,11 @@ public class ChatHandler extends Thread {
         }
 
         try {
-            messaggio = (Messaggio) in.readObject();
+            richeesta = (Richiesta) in.readObject();
+            System.out.println(String.format("L'utente %s ha inviato un messaggio: \n %s.",
+                    richeesta.getMittente(), richeesta.getMessaggio()));
+            risposta = new Risposta(0);
+            out.writeObject(risposta);
         } catch (IOException ex) {
             System.err.println("Errore durante la lettura del messaggio.. " + ex.getMessage());
         } catch (ClassNotFoundException e) {

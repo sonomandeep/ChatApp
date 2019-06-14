@@ -2,6 +2,7 @@ package it.mandeep.client.chat;
 
 import it.mandeep.client.networking.MessageThread;
 import it.mandeep.client.networking.RequestThread;
+import it.mandeep.libreria.datastructures.Messaggio;
 import it.mandeep.libreria.datastructures.Utente;
 import it.mandeep.libreria.network.richiesta.ConcreteRichiestaBuilder;
 import it.mandeep.libreria.network.richiesta.Richiesta;
@@ -21,13 +22,16 @@ public class SendMessageTest {
 
     Utente mittente = new Utente("Mandeep", "Singh", "Dio", "1234");
     Utente destinatario = new Utente("Utente", "Prova", "Utente", "1234");
+    Messaggio messaggio = new Messaggio("Hello world!");
 
     @Test
     void sendMessage() {
         RichiestaBuilder richiestaBuilder = new ConcreteRichiestaBuilder();
-        Richiesta richiesta = richiestaBuilder.buildTipoRichiesta(TipoRichiesta.LOGIN)
+        Richiesta richiesta = richiestaBuilder
+                .buildTipoRichiesta(TipoRichiesta.LOGIN)
                 .buildMittente(mittente)
                 .buildDestinatario(destinatario)
+                .buildMessaggio(messaggio)
                 .build();
 
         // Invio di una richiesta al server
