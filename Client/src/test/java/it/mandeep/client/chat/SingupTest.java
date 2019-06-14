@@ -7,13 +7,14 @@ import it.mandeep.libreria.network.richiesta.Richiesta;
 import it.mandeep.libreria.network.richiesta.RichiestaBuilder;
 import it.mandeep.libreria.network.richiesta.TipoRichiesta;
 import it.mandeep.libreria.network.risposta.Risposta;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SingupTest {
 
-    Utente mittente = new Utente("Mandeep", "Singh", "Dio", "1234");
+    Utente mittente = new Utente("Utente", "Prova", "Utente", "1234");
 
     @Test
     void signupTest() {

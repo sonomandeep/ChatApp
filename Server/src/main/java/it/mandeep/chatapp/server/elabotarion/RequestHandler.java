@@ -1,7 +1,5 @@
 package it.mandeep.chatapp.server.elabotarion;
 
-import it.mandeep.chatapp.server.core.ClientHandler;
-import it.mandeep.chatapp.server.core.Server;
 import it.mandeep.chatapp.server.database.dao.UtenteDao;
 import it.mandeep.libreria.datastructures.Utente;
 import it.mandeep.libreria.network.richiesta.Richiesta;
@@ -42,7 +40,6 @@ public class RequestHandler {
                         return risposta;
                     }
                 }
-                // RequestHandler.utenti.add(richiesta.getMittente());
                 utenteDao.add(richiesta.getMittente());
                 utenti = utenteDao.readAll();
                 System.out.println(String.format("L'utente %s è stato inserito.", richiesta.getMittente().getUsername()));
@@ -54,7 +51,19 @@ public class RequestHandler {
                 RequestHandler.utentiOnline.add(richiesta.getMittente());
                 System.out.println(String.format("%s ha effettuato il login.", richiesta.getMittente().getUsername()));
                 risposta.setRisultatoRisposta(0);
+                return risposta;
+
+            case UPDATE_USER:
                 break;
+
+            case DELETE_USER:
+                if (!utenteDao.delete(richiesta.getMittente()))
+                    risposta.setRisultatoRisposta(0);
+                else
+                    risposta.setRisultatoRisposta(1);
+                utenti = utenteDao.readAll();
+                System.out.println(String.format("L'utente %s è stato eliminato.", richiesta.getMittente().getUsername()));
+                return risposta;
 
             case SEND_MESSAGE:
                 //Cerco l'inrizzo del client che si è cercato e lo aggiungo alla risposta

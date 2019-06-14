@@ -7,6 +7,7 @@ import it.mandeep.libreria.network.richiesta.Richiesta;
 import it.mandeep.libreria.network.richiesta.RichiestaBuilder;
 import it.mandeep.libreria.network.richiesta.TipoRichiesta;
 import it.mandeep.libreria.network.risposta.Risposta;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +19,7 @@ public class LogoutTest {
     @Test
     void logoutTest() {
         RichiestaBuilder richiestaBuilder = new ConcreteRichiestaBuilder();
-        Richiesta richiesta = richiestaBuilder.buildTipoRichiesta(TipoRichiesta.SEND_MESSAGE).buildMittente(mittente).build();
+        Richiesta richiesta = richiestaBuilder.buildTipoRichiesta(TipoRichiesta.LOGOUT).buildMittente(mittente).build();
         RequestThread requestThread = new RequestThread(richiesta);
         requestThread.start();
         try {

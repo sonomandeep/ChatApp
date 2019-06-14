@@ -12,14 +12,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginTest {
+public class DeleteUserTest {
 
     Utente mittente = new Utente("Mandeep", "Singh", "Dio", "1234");
 
     @Test
-    void loginTest() {
+    void deleteUserTest() {
         RichiestaBuilder richiestaBuilder = new ConcreteRichiestaBuilder();
-        Richiesta richiesta = richiestaBuilder.buildTipoRichiesta(TipoRichiesta.LOGIN).buildMittente(mittente)
+        Richiesta richiesta = richiestaBuilder.buildTipoRichiesta(TipoRichiesta.DELETE_USER).buildMittente(mittente)
                 .build();
 
         // Invio di una richiesta al server
@@ -34,4 +34,5 @@ public class LoginTest {
         Risposta risposta = requestThread.getRisposta();
         assertEquals(risposta.getRisultatoRisposta(), 0);
     }
+
 }

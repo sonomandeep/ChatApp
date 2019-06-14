@@ -160,14 +160,17 @@ public class UtenteDao implements Dao<Utente> {
      * @param utente {@link Utente} che deve essere eliminato.
      */
     @Override
-    public void delete(Utente utente) {
+    public boolean delete(Utente utente) {
+        boolean risultato = false;
         try {
-            preparedStatement = Connect.getConnection().prepareStatement("DELETE FROM utenti WHERE id = ?");
-            preparedStatement.setInt(1, utente.getID());
+            preparedStatement = Connect.getConnection().prepareStatement("DELETE FROM utenti WHERE username = ?");
+            preparedStatement.setString(1, utente.getUsername());
+            risultato = preparedStatement.execute();
             preparedStatement.close();
         } catch (SQLException e) {
             System.err.println("Errore durante l'eliminazione di un utente: " + e.getMessage());
         }
+        return risultato;
     }
 
     /**

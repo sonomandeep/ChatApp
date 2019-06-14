@@ -6,5 +6,7 @@ public enum TipoRichiesta implements Serializable {
     LOGIN,
     LOGOUT,
     SIGNUP,
+    UPDATE_USER,
+    DELETE_USER,
     SEND_MESSAGE
 }

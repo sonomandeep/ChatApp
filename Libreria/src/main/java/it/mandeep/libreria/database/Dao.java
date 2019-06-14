@@ -11,5 +11,5 @@ public interface Dao<T> {
     // Update
     void update(T t);
     // Delete
-    void delete(T t);
+    boolean delete(T t);
 }
