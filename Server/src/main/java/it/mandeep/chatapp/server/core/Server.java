@@ -1,8 +1,12 @@
 package it.mandeep.chatapp.server.core;
 
 
+import it.mandeep.chatapp.server.database.dao.UtenteDao;
+import it.mandeep.libreria.datastructures.Utente;
+
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.List;
 
 /**
  * La classe {@code Server} si occupa di ricevere le connessioni dai client.
@@ -16,6 +20,7 @@ public class Server {
      * ad un {@link ClientHandler}.
      */
     public Server() {
+        new UtenteDao();
         try {
             server = new ServerSocket(Adress.port);
             System.out.println(String.format("Server avviato con successo, in ascolto sulla porta: %d.", Adress.port));

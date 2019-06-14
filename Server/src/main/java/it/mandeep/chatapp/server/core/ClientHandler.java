@@ -23,7 +23,7 @@ public class ClientHandler extends Thread {
     private ObjectInputStream in;
     private Richiesta richiesta;
     private Risposta risposta;
-    public static Map<Utente, String> utentiOnline = new Hashtable<>();
+    //public static Map<Utente, String> utentiOnline = new Hashtable<>();
 
     /**
      * Unico costruttore della classe, consentedi inizializzare il Socker del Client da gestire.

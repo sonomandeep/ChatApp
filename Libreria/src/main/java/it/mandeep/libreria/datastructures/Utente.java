@@ -1,6 +1,7 @@
 package it.mandeep.libreria.datastructures;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * La classe {@code Utente} rappresenta l'utilizzatore del programma.
@@ -12,6 +13,8 @@ public class Utente implements Serializable {
     private String cognome;
     private String username;
     private String password;
+    private String adress;
+    private boolean online;
 
     public Utente(String nome, String cognome, String username, String password) {
         this.nome = nome;
@@ -68,6 +71,41 @@ public class Utente implements Serializable {
         this.password = password;
     }
 
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Utente)) return false;
+        Utente utente = (Utente) o;
+        return getID() == utente.getID() &&
+                isOnline() == utente.isOnline() &&
+                Objects.equals(getNome(), utente.getNome()) &&
+                Objects.equals(getCognome(), utente.getCognome()) &&
+                Objects.equals(getUsername(), utente.getUsername()) &&
+                Objects.equals(getPassword(), utente.getPassword()) &&
+                Objects.equals(getAdress(), utente.getAdress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getID(), getNome(), getCognome(), getUsername(), getPassword(), getAdress(), isOnline());
+    }
+
     @Override
     public String toString() {
         return "Utente{" +
@@ -76,6 +114,8 @@ public class Utente implements Serializable {
                 ", cognome='" + cognome + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", adress='" + adress + '\'' +
+                ", online=" + online +
                 '}';
     }
 }

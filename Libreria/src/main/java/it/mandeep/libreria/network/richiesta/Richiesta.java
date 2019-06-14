@@ -48,4 +48,14 @@ public class Richiesta implements Serializable {
     public void setDestinatario(Utente destinatario) {
         this.destinatario = destinatario;
     }
+
+    @Override
+    public String toString() {
+        return "Richiesta{" +
+                "tipoRichiesta=" + tipoRichiesta +
+                ", messaggio=" + messaggio +
+                ", mittente=" + mittente +
+                ", destinatario=" + destinatario +
+                '}';
+    }
 }

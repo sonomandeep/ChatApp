@@ -13,7 +13,8 @@ public class ConcreteRichiestaBuilder implements RichiestaBuilder {
     private Utente mittente = null;
     private Utente destinatario = null;
 
-    public RichiestaBuilder builTipoRichiesta(TipoRichiesta tipoRichiesta) {
+    @Override
+    public RichiestaBuilder buildTipoRichiesta(TipoRichiesta tipoRichiesta) {
         this.tipoRichiesta = tipoRichiesta;
         return this;
     }

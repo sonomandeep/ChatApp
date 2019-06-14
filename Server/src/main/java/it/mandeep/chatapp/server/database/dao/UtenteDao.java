@@ -41,7 +41,7 @@ public class UtenteDao implements Dao<Utente> {
                         "    nome TEXT NOT NULL,\n" +
                         "    cognome TEXT NOT NULL,\n" +
                         "    username TEXT UNIQUE NOT NULL,\n" +
-                        "    paswrod TEXT NOT NULL\n" +
+                        "    password TEXT NOT NULL\n" +
                         ");");
                 preparedStatement.execute();
                 preparedStatement.close();
