@@ -45,7 +45,7 @@ public class ChatHandler extends Thread {
         try {
             richeesta = (Richiesta) in.readObject();
             System.out.println(String.format("L'utente %s ha inviato un messaggio: \n %s.",
-                    richeesta.getMittente(), richeesta.getMessaggio()));
+                    richeesta.getMittente().getUsername(), richeesta.getMessaggio().getContenuto()));
             risposta = new Risposta(0);
             out.writeObject(risposta);
         } catch (IOException ex) {

@@ -1,5 +1,6 @@
-package it.mandeep.client.chat;
+package it.mandeep.client;
 
+import it.mandeep.client.chat.Chat;
 import it.mandeep.client.networking.MessageThread;
 import it.mandeep.client.networking.RequestThread;
 import it.mandeep.libreria.datastructures.Messaggio;
@@ -9,23 +10,18 @@ import it.mandeep.libreria.network.richiesta.Richiesta;
 import it.mandeep.libreria.network.richiesta.RichiestaBuilder;
 import it.mandeep.libreria.network.richiesta.TipoRichiesta;
 import it.mandeep.libreria.network.risposta.Risposta;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+public class Main {
 
-public class SendMessageTest {
+    public static void main(String[] args) {
+        Chat chat = new Chat();
+        chat.start();
 
-    // Invio di un messaggio:
-    // 1. L'utente manda una richiesta al server per sapere l'inrizzo del destinatario
-    // 2. Il server risponde
-    // 3. L'utente si connette con l'indirizzo appena ricevuto ed invia il messaggio
+        Utente mittente = new Utente("Mandeep", "Singh", "Dio", "1234");
+        Utente destinatario = new Utente("Utente", "Prova", "Utente", "1234");
+        Messaggio messaggio = new Messaggio("Hello world!");
 
-    Utente mittente = new Utente("Mandeep", "Singh", "Dio", "1234");
-    Utente destinatario = new Utente("Utente", "Prova", "Utente", "1234");
-    Messaggio messaggio = new Messaggio("Hello world!");
-
-    @Test
-    void sendMessage() {
+        // Creo la richiesta
         RichiestaBuilder richiestaBuilder = new ConcreteRichiestaBuilder();
         Richiesta richiesta = richiestaBuilder
                 .buildTipoRichiesta(TipoRichiesta.SEND_MESSAGE)
@@ -34,15 +30,16 @@ public class SendMessageTest {
                 .buildMessaggio(messaggio)
                 .build();
 
-        // Invio di una richiesta al server
+        // Invio la richiesta al server aspettando l'indirizzo del client destinatario
         RequestThread requestThread = new RequestThread(richiesta);
         requestThread.start();
         try {
+            // Aspetto che il thread della richiesta finisca
             requestThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // Ricezione di una risposta
+        // Ricevo la risposta dal server
         Risposta risposta = requestThread.getRisposta();
         if (risposta.getRisultatoRisposta() == 0) {
             MessageThread messageThread = new MessageThread(richiesta, risposta.getAdress());
@@ -54,7 +51,5 @@ public class SendMessageTest {
             }
             risposta = messageThread.getRisposta();
         }
-         assertEquals(risposta.getRisultatoRisposta(), 0);
     }
-
 }
