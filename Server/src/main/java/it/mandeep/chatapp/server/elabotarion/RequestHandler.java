@@ -69,7 +69,7 @@ public class RequestHandler {
                 //Cerco l'inrizzo del client che si è cercato e lo aggiungo alla risposta
                 Utente destinatario = richiesta.getDestinatario();
 
-                for (Utente u : RequestHandler.utenti) {
+                for (Utente u : RequestHandler.utentiOnline) {
                     if (u.getUsername().equals(destinatario.getUsername())) {
                         risposta.setAdress(u.getAdress());
                         risposta.setRisultatoRisposta(0);

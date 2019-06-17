@@ -44,6 +44,7 @@ public class SendMessageTest {
         }
         // Ricezione di una risposta
         Risposta risposta = requestThread.getRisposta();
+        System.out.println(risposta.getRisultatoRisposta());
         if (risposta.getRisultatoRisposta() == 0) {
             MessageThread messageThread = new MessageThread(richiesta, risposta.getAdress());
             messageThread.start();
