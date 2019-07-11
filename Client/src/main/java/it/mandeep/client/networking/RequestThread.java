@@ -50,6 +50,7 @@ public class RequestThread extends Thread {
                 System.err.println("Errore durante la chiusera della connessione: " + ex.getMessage());
             }
         }
+
     }
 
     public Risposta getRisposta() {

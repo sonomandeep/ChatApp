@@ -1,21 +1,9 @@
 package it.mandeep.client.controller;
 
-import it.mandeep.client.model.Model;
-
-public class MainController {
-
-    private Model model;
+public class MainController extends Controller {
 
     public void inviaMessaggio() {
-        model.inviaMessaggio();
+        this.getModel().inviaMessaggio();
     }
 
-    public Model getModel() {
-        return model;
-    }
-
-    public void setModel(Model model) {
-        this.model = model;
-        model.inizializza();
-    }
 }

@@ -16,6 +16,11 @@ public class Utente implements Serializable {
     private String adress;
     private boolean online;
 
+    public Utente(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public Utente(String nome, String cognome, String username, String password) {
         this.nome = nome;
         this.cognome = cognome;

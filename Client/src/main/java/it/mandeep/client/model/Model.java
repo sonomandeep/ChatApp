@@ -27,6 +27,7 @@ public class Model {
 
     public void login(Utente utente) {
         richiesta = richiestaBuilder.buildMittente(utente).buildTipoRichiesta(TipoRichiesta.LOGIN).build();
+        requestThread = new RequestThread(richiesta);
         requestThread.setDaemon(true);
         requestThread.start();
     }
