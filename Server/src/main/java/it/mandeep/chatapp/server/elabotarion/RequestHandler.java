@@ -47,7 +47,14 @@ public class RequestHandler {
                 return risposta;
 
             case LOGIN:
+                // TODO: Migliorare il login, magri usando la lista utenti
+                int ris = utenteDao.login(richiesta.getMittente());
+                if (ris != 0) {
+                    risposta.setRisultatoRisposta(ris);
+                    return risposta;
+                }
                 richiesta.getMittente().setAdress(adress);
+                System.out.println(adress);
                 RequestHandler.utentiOnline.add(richiesta.getMittente());
                 System.out.println(String.format("%s ha effettuato il login.", richiesta.getMittente().getUsername()));
                 risposta.setRisultatoRisposta(0);
