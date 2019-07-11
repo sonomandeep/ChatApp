@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Messaggio implements Serializable {
 
+    private static final long serialVersionUID = 4734674844795306048L;
     private String contenuto;
 
     public Messaggio(String contenuto) {

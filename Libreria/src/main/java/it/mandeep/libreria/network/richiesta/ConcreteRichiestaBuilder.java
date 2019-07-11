@@ -8,6 +8,7 @@ import it.mandeep.libreria.datastructures.Utente;
  */
 public class ConcreteRichiestaBuilder implements RichiestaBuilder {
 
+    private static final long serialVersionUID = 5483332788927841145L;
     private TipoRichiesta tipoRichiesta = null;
     private Messaggio messaggio = null;
     private Utente mittente = null;

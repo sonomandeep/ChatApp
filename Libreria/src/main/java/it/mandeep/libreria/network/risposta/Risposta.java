@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public class Risposta implements Serializable {
 
+    private static final long serialVersionUID = -739025985924162931L;
     private int risultatoRisposta;
     private Utente utente;
     private String adress;

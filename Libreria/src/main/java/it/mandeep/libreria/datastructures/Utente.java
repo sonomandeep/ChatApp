@@ -8,6 +8,7 @@ import java.util.Objects;
  */
 public class Utente implements Serializable {
 
+    private static final long serialVersionUID = 1163020545145091393L;
     private int ID;
     private String nome;
     private String cognome;

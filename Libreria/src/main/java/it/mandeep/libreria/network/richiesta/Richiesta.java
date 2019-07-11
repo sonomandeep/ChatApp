@@ -12,6 +12,7 @@ import java.io.Serializable;
  */
 public class Richiesta implements Serializable {
 
+    private static final long serialVersionUID = 5422119085386529419L;
     private TipoRichiesta tipoRichiesta;
     private Messaggio messaggio = null;
     private Utente mittente = null;

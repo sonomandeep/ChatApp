@@ -35,7 +35,7 @@ public class Chat extends Thread {
                 System.out.println("Server connesso con successo.");
                 Thread.sleep(500);
             } catch (IOException ex) {
-                System.err.println("Errore durante alla connessione al client.. " + ex.getMessage());
+                System.err.println("Errore durante la connessione al client.. " + ex.getMessage());
             } catch (InterruptedException e) {
                 System.err.println("Errore durante la pausa del Thread.. " + e.getMessage());
             }
