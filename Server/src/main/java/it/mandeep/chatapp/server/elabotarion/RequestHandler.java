@@ -1,5 +1,6 @@
 package it.mandeep.chatapp.server.elabotarion;
 
+import it.mandeep.chatapp.server.core.Main;
 import it.mandeep.chatapp.server.database.dao.UtenteDao;
 import it.mandeep.libreria.datastructures.Utente;
 import it.mandeep.libreria.network.richiesta.Richiesta;
@@ -14,8 +15,6 @@ import java.util.List;
 public class RequestHandler {
 
     private static UtenteDao utenteDao;
-    static List<Utente> utenti;
-    static List<Utente> utentiOnline;
 
     /**
      * Il metodo {@code handle} è l'unico metodo della classe {@link RequestHandler}, elabora una risposta
@@ -29,19 +28,18 @@ public class RequestHandler {
 
         Risposta risposta = new Risposta(0);
         utenteDao = new UtenteDao();
-        utenti = utenteDao.readAll();
-        utentiOnline = new ArrayList<>();
+        Main.utenti = utenteDao.readAll();
 
         switch (richiesta.getTipoRichiesta()) {
             case SIGNUP:
-                for (Utente u : RequestHandler.utenti) {
+                for (Utente u : Main.utenti) {
                     if (u.getUsername().equals(richiesta.getMittente().getUsername())) {
                         risposta.setRisultatoRisposta(1);
                         return risposta;
                     }
                 }
                 utenteDao.add(richiesta.getMittente());
-                utenti = utenteDao.readAll();
+                Main.utenti = utenteDao.readAll();
                 System.out.println(String.format("L'utente %s è stato inserito.", richiesta.getMittente().getUsername()));
                 risposta.setRisultatoRisposta(0);
                 return risposta;
@@ -55,7 +53,7 @@ public class RequestHandler {
                 }
                 richiesta.getMittente().setAdress(adress);
                 System.out.println(adress);
-                RequestHandler.utentiOnline.add(richiesta.getMittente());
+                Main.utentiOnline.add(richiesta.getMittente());
                 System.out.println(String.format("%s ha effettuato il login.", richiesta.getMittente().getUsername()));
                 risposta.setRisultatoRisposta(0);
                 return risposta;
@@ -68,7 +66,7 @@ public class RequestHandler {
                     risposta.setRisultatoRisposta(0);
                 else
                     risposta.setRisultatoRisposta(1);
-                utenti = utenteDao.readAll();
+                Main.utenti = utenteDao.readAll();
                 System.out.println(String.format("L'utente %s è stato eliminato.", richiesta.getMittente().getUsername()));
                 return risposta;
 
@@ -76,8 +74,11 @@ public class RequestHandler {
                 //Cerco l'inrizzo del client che si è cercato e lo aggiungo alla risposta
                 Utente destinatario = richiesta.getDestinatario();
 
-                for (Utente u : RequestHandler.utentiOnline) {
+                System.out.println(Main.utentiOnline.size());
+
+                for (Utente u : Main.utentiOnline) {
                     if (u.getUsername().equals(destinatario.getUsername())) {
+                        System.out.println(u.getAdress());
                         risposta.setAdress(u.getAdress());
                         risposta.setRisultatoRisposta(0);
                         return risposta;
@@ -87,7 +88,7 @@ public class RequestHandler {
                 return risposta;
 
             case LOGOUT:
-                RequestHandler.utentiOnline.remove(richiesta.getMittente());
+                Main.utentiOnline.remove(richiesta.getMittente());
                 System.out.println(String.format("%s ha effettuato il logout.", richiesta.getMittente().getUsername()));
                 risposta.setRisultatoRisposta(0);
                 return risposta;
