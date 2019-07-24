@@ -30,6 +30,15 @@ public class Model {
         requestThread = new RequestThread(richiesta);
         requestThread.setDaemon(true);
         requestThread.start();
+
+        // TODO: visualizzare la risposta del thread sulla GUI
+        try {
+            requestThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(requestThread.getRisposta().getRisultatoRisposta());
     }
 
     public void inviaMessaggio() {
