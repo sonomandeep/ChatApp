@@ -12,7 +12,6 @@ public class Controller {
 
     public void setModel(Model model) {
         this.model = model;
-        model.inizializza();
     }
 
 }

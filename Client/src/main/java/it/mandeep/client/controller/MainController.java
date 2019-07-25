@@ -6,4 +6,7 @@ public class MainController extends Controller {
         this.getModel().inviaMessaggio();
     }
 
+    public void avviaServerInterno() {
+
+    }
 }
