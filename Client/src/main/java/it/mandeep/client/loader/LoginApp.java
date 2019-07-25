@@ -1,7 +1,6 @@
 package it.mandeep.client.loader;
 
 import it.mandeep.client.controller.LoginController;
-import it.mandeep.client.controller.MainController;
 import it.mandeep.client.model.Model;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

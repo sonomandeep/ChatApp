@@ -20,7 +20,6 @@ public class LoginController extends Controller {
 
     @FXML
     public void login() {
-
         if (usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
             loginResultLabel.setText("Compila tutti i campi.");
             return;

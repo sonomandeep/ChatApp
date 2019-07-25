@@ -10,7 +10,7 @@
    <children>
       <TextField fx:id="usernameTextField" prefWidth="300.0" promptText="Username" />
       <TextField fx:id="passwordTextField" promptText="Password" />
-      <Button mnemonicParsing="false" onAction="#login" prefWidth="200.0" text="Button" />
+      <Button mnemonicParsing="false" onAction="#login" prefWidth="200.0" text="Accedi" />
       <Label fx:id="loginResultLabel" text="Label" />
    </children>
    <padding>

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginTest {
 
-    Utente mittente = new Utente("Mandeep", "Singh", "Dio", "1234");
+    Utente mittente = new Utente("Mandeep", "Singh", "Utente", "1234");
 
     @Test
     void loginTest() {
