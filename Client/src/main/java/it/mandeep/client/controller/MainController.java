@@ -3,10 +3,7 @@ package it.mandeep.client.controller;
 public class MainController extends Controller {
 
     public void inviaMessaggio() {
-        this.getModel().inviaMessaggio();
-    }
-
-    public void avviaServerInterno() {
-
+        // TODO: Invia messaggio
+        // this.getModel().inviaMessaggio();
     }
 }

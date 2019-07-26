@@ -8,5 +8,7 @@ public enum TipoRichiesta implements Serializable {
     SIGNUP,
     UPDATE_USER,
     DELETE_USER,
-    SEND_MESSAGE
+    SEND_MESSAGE,
+    GET_ALL_USERS,
+    IS_ONLINE
 }

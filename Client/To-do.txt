@@ -1,0 +1,29 @@
+1. Invio di un messaggio
+    Per poter inviare un messaggio bisogna avere le informazioni del mittente, del destinatario ed il messaggio.
+        - Le informazioni del mittente sono all'interno del model appena l'utente effettua il login.
+        - Le informazioni del destinatario bisogna cercarle all'interno della lista degli utenti online, quindi sarà neccessario aggiornarla frequentemente.
+        - Il messaggio si prende dalla view.
+    Una volta raccolti tutti i dati necessari, creare una richiesta con essi e mandarla al server, il quale elaborando le informazioni date deve restituire l'indirizzo
+    ip del destinatario. Il mittente una volta ricevuta la risposta si connette al server interno del client destinatario ed invia il messaggio per poi aspettarne il
+    risultato.
+
+2. Utenti online
+    Ogni client dovrà poter controllare frequentemente la lista degli utenti online. E' possibile farlo in diversi modi:
+        - L'utente premendo un pulsante richiesta l'aggiornamento della lista degli utenti online, quindi il client invia una richiesta al server che risponde con 
+          la lista degli utenti online.
+        - I client hanno la lista completa degli utenti, anche se essi sono offline, quando l'utente accede alla chat con qualcuno di essi, il client si occupa
+          di inviare una richiesta al server per vedere se l'utente è online, se lo è lo visualizza con una label.
+        - I cient dopo un tempo x inviano una richiesta al server per ricevere la lista degli utenti online.
+        - Il server, ogni volta che si connette un utente nuovo, invia le sue informazioni ai client che lo aggiungono alla lista degli utenti online.
+
+        Penso la scelta migliore sia la seconda.
+
+        Quali sono i passi da fare per completare l'operazione?
+        a. Quando parte la finestra principale il client invia la richiesta per leggere la lista di tutti gli utenti.
+        b. Gli utenti vengono visualizzati sulla gui.
+        c. L'utente può scegliere uno di questi utenti, una volta scelto si apre la chat e viene visualizzato se l'utente è online oppure no.
+        d. Se il destinatario è online si può inviare un messaggio.
+
+3. Callable
+    Migliorare la programmazione concorrente con l'uso dell'interfaccia Callable, se non trovo una soluzione migliore.
+    La caratteristica dell'interfaccia Callable è che restituisce direttamente il risultato del Thread, senza dover manualmente aspettarne la fine.

@@ -1,20 +1,14 @@
 package it.mandeep.chatapp.server.elabotarion;
 
 import it.mandeep.chatapp.server.core.Main;
-import it.mandeep.chatapp.server.database.dao.UtenteDao;
 import it.mandeep.libreria.datastructures.Utente;
 import it.mandeep.libreria.network.richiesta.Richiesta;
 import it.mandeep.libreria.network.risposta.Risposta;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * La classe {@code RequestHandler} gestisce le richieste che arrivano dal client e elabora una risposta adeguata.
  */
 public class RequestHandler {
-
-    private static UtenteDao utenteDao;
 
     /**
      * Il metodo {@code handle} è l'unico metodo della classe {@link RequestHandler}, elabora una risposta
@@ -28,8 +22,7 @@ public class RequestHandler {
     public static Risposta handle(Richiesta richiesta, String adress) {
 
         Risposta risposta = new Risposta(0);
-        utenteDao = new UtenteDao();
-        Main.utenti = utenteDao.readAll();
+        Utente mittente;
 
         switch (richiesta.getTipoRichiesta()) {
             case SIGNUP:
@@ -39,8 +32,8 @@ public class RequestHandler {
                         return risposta;
                     }
                 }
-                utenteDao.add(richiesta.getMittente());
-                Main.utenti = utenteDao.readAll();
+                Main.utenteDao.add(richiesta.getMittente());
+                Main.utenti = Main.utenteDao.readAll();
                 System.out.println(String.format("L'utente %s è stato inserito.", richiesta.getMittente().getUsername()));
                 risposta.setRisultatoRisposta(0);
                 return risposta;
@@ -51,15 +44,19 @@ public class RequestHandler {
              * in tutti gli altri casi il risultato è 2
              */
             case LOGIN:
+                // Scorro la lista di tutti gli utenti presenti nel database
                 for (Utente u : Main.utenti) {
+                    // Controllo se lo username corrisponde a quello del mittente della richiesta
                     if (u.getUsername().equals(richiesta.getMittente().getUsername())) {
+                        // Controllo se la password corrisponde a quello del mittente della richiesta
                         if (u.getPassword().equals(richiesta.getMittente().getPassword())) {
                             // TODO: provare ad aggiungere l'indirizzo dal client stesso quando viene inviata la richiesta
-                            richiesta.getMittente().setAdress(adress);
-                            System.out.println(adress);
-                            Main.utentiOnline.add(richiesta.getMittente());
+                            mittente = richiesta.getMittente();
+                            mittente.setAdress(adress);
+                            Main.utentiOnline.add(mittente);
                             System.out.println(String.format("%s ha effettuato il login.", richiesta.getMittente().getUsername()));
                             risposta.setRisultatoRisposta(0);
+                            risposta.setUtente(mittente);
                             return risposta;
                         } else {
                             // Password non corrisponde allo username
@@ -76,11 +73,11 @@ public class RequestHandler {
                 break;
 
             case DELETE_USER:
-                if (!utenteDao.delete(richiesta.getMittente()))
+                if (!Main.utenteDao.delete(richiesta.getMittente()))
                     risposta.setRisultatoRisposta(0);
                 else
                     risposta.setRisultatoRisposta(1);
-                Main.utenti = utenteDao.readAll();
+                Main.utenti = Main.utenteDao.readAll();
                 System.out.println(String.format("L'utente %s è stato eliminato.", richiesta.getMittente().getUsername()));
                 return risposta;
 
