@@ -50,7 +50,6 @@ public class RequestHandler {
                     if (u.getUsername().equals(richiesta.getMittente().getUsername())) {
                         // Controllo se la password corrisponde a quello del mittente della richiesta
                         if (u.getPassword().equals(richiesta.getMittente().getPassword())) {
-                            // TODO: provare ad aggiungere l'indirizzo dal client stesso quando viene inviata la richiesta
                             mittente = richiesta.getMittente();
                             mittente.setAdress(adress);
                             Main.utentiOnline.add(mittente);
@@ -91,8 +90,6 @@ public class RequestHandler {
                 //Cerco l'inrizzo del client che si è cercato e lo aggiungo alla risposta
                 Utente destinatario = richiesta.getDestinatario();
 
-                System.out.println(Main.utentiOnline.size());
-
                 for (Utente u : Main.utentiOnline) {
                     if (u.getUsername().equals(destinatario.getUsername())) {
                         risposta.setAdress(u.getAdress());
@@ -107,6 +104,22 @@ public class RequestHandler {
                 Main.utentiOnline.remove(richiesta.getMittente());
                 System.out.println(String.format("%s ha effettuato il logout.", richiesta.getMittente().getUsername()));
                 risposta.setRisultatoRisposta(0);
+                return risposta;
+
+            case GET_ALL_USERS:
+                risposta.setUtenti(Main.utenti);
+                risposta.setRisultatoRisposta(0);
+                return risposta;
+
+            case IS_ONLINE:
+                for (Utente u : Main.utentiOnline) {
+                    if (u.getUsername().equals(richiesta.getDestinatario().getUsername())) {
+                        risposta.setUtente(u);
+                        risposta.setRisultatoRisposta(0);
+                        return risposta;
+                    }
+                }
+                risposta.setRisultatoRisposta(1);
                 return risposta;
 
             default:
