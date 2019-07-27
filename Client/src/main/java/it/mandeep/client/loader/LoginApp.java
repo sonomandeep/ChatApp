@@ -21,6 +21,7 @@ public class LoginApp extends Application {
 
         LoginController controller = loader.getController();
         controller.setModel(new Model());
+        controller.getModel().getUtenti();
 
         stage.setScene(new Scene(root));
         stage.show();

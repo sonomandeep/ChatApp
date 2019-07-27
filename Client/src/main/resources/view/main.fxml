@@ -9,17 +9,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:controller="it.mandeep.client.controller.MainController" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.mandeep.client.controller.MainController">
    <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextArea fx:id="onlineUsersArea" editable="false" prefHeight="10000.0" />
-         </children>
-      </VBox>
+      <VBox fx:id="usersBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
+            <Label fx:id="onlineLabel" alignment="CENTER" prefWidth="20000.0" text="Sto controllando se è online..." />
             <TextArea fx:id="chatArea" editable="false" prefHeight="10000.0" prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>

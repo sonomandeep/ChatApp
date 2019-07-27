@@ -31,7 +31,9 @@ public class Chat extends Thread {
 
         while (server != null) {
             try {
-                new ChatHandler(server.accept()).start();
+                ChatHandler chatHandler = new ChatHandler(server.accept());
+                chatHandler.setDaemon(true);
+                chatHandler.start();
                 System.out.println("Server connesso con successo.");
                 Thread.sleep(500);
             } catch (IOException ex) {

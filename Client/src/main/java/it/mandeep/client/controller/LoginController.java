@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class LoginController extends Controller {
 
@@ -27,7 +28,7 @@ public class LoginController extends Controller {
     private Utente utente;
 
     @FXML
-    public void login() throws IOException {
+    public void login() throws IOException, ExecutionException, InterruptedException {
         if (usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
             loginResultLabel.setText("Compila tutti i campi.");
             return;
@@ -36,20 +37,31 @@ public class LoginController extends Controller {
         utente = new Utente(usernameTextField.getText(), passwordTextField.getText());
         Risposta risposta = this.getModel().login(utente);
 
-        if (risposta.getRisultatoRisposta() == 0) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-
-            MainController controller = loader.getController();
-            controller.setModel(new Model());
-
-            stage.show();
-            closeApp();
+        if (risposta.getRisultatoRisposta() == 1) {
+            loginResultLabel.setText("La password non corrisponde allo username.");
+            return;
         }
-        // TODO: Finire il login.
+
+        if (risposta.getRisultatoRisposta() == 2) {
+            loginResultLabel.setText("Credenziali errate.");
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+
+        MainController controller = loader.getController();
+        controller.setModel(new Model());
+
+        // FixMe: Trovare un metodo migliore per inizializzare il controller ed il model.
+        controller.getModel().inizializza();
+        controller.inizializza();
+
+        stage.show();
+        closeApp();
     }
 
     public void closeApp() {
