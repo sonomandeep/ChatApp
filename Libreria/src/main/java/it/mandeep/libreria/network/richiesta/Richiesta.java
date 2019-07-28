@@ -14,7 +14,6 @@ public class Richiesta implements Serializable {
 
     private static final long serialVersionUID = 5422119085386529419L;
     private TipoRichiesta tipoRichiesta;
-    private Messaggio messaggio = null;
     private Utente mittente = null;
     private Utente destinatario = null;
 
@@ -24,14 +23,6 @@ public class Richiesta implements Serializable {
 
     public void setTipoRichiesta(TipoRichiesta tipoRichiesta) {
         this.tipoRichiesta = tipoRichiesta;
-    }
-
-    public Messaggio getMessaggio() {
-        return messaggio;
-    }
-
-    public void setMessaggio(Messaggio messaggio) {
-        this.messaggio = messaggio;
     }
 
     public Utente getMittente() {
@@ -54,7 +45,6 @@ public class Richiesta implements Serializable {
     public String toString() {
         return "Richiesta{" +
                 "tipoRichiesta=" + tipoRichiesta +
-                ", messaggio=" + messaggio +
                 ", mittente=" + mittente +
                 ", destinatario=" + destinatario +
                 '}';

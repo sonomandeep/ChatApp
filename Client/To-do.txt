@@ -27,3 +27,17 @@
 3. Callable
     Migliorare la programmazione concorrente con l'uso dell'interfaccia Callable, se non trovo una soluzione migliore.
     La caratteristica dell'interfaccia Callable è che restituisce direttamente il risultato del Thread, senza dover manualmente aspettarne la fine.
+
+4. Ricezione dei messaggio
+    Una volta che un client invia un messaggio il ricevente deve essere capace di gestire il messaggio e di visualizzarlo.
+    
+    Come gestisce il client la ricezione dei messaggi?
+    Per adesso ho pensato di farlo nello stesso modo in cui il server gestisce le richieste, ovvero avviando un thread che cerca di ricevere tutti i messaggi e crea 
+    un thread per ognuno di essi a cui delega la gestione del messaggio. Fino a qui tutto bene ma, come visualizzo il messaggio una volta ricevuto?
+
+    Ho appena trovato un metodo:
+        - Aggiungo una lista che contiene tutti i messaggi al model
+        - Passo questa lista alla chat
+        - Ogni volta che ricevo un messaggio lo aggiungo alla lista
+        - Implemento un qualche tipo di listener che ogni volta che viene cambiato il contenuto della lista crea un evento
+        - Gestisco l'evento ed aggiungo il messaggio alla textarea.

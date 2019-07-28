@@ -38,7 +38,6 @@ public class ConcreteRichiestaBuilder implements RichiestaBuilder {
     public Richiesta build() {
         Richiesta richiesta = new Richiesta();
         richiesta.setDestinatario(destinatario);
-        richiesta.setMessaggio(messaggio);
         richiesta.setMittente(mittente);
         richiesta.setTipoRichiesta(tipoRichiesta);
         return richiesta;

@@ -1,9 +1,9 @@
 package it.mandeep.client.model;
 
 import it.mandeep.client.chat.Chat;
-import it.mandeep.client.networking.MessageThread;
-import it.mandeep.client.networking.RequestThread;
+import it.mandeep.client.networking.MessaggioCallable;
 import it.mandeep.client.networking.RichiestaCallable;
+import it.mandeep.libreria.datastructures.Messaggio;
 import it.mandeep.libreria.datastructures.Utente;
 import it.mandeep.libreria.network.richiesta.ConcreteRichiestaBuilder;
 import it.mandeep.libreria.network.richiesta.Richiesta;
@@ -18,20 +18,27 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * Classe Model, gestisce tutta la logica dietro al programma.
+ */
 public class Model {
 
     private Chat chatServer;
-    private RequestThread requestThread;
     private RichiestaCallable richiestaCallable;
+    private MessaggioCallable messaggioCallable;
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private Future<Risposta> future;
     private RichiestaBuilder richiestaBuilder = new ConcreteRichiestaBuilder();
     private Richiesta richiesta;
     private Risposta risposta;
+    private Messaggio messaggio;
     private Utente utente;
     private Utente destinatario;
     private List<Utente> utenti = new ArrayList<>();
 
+    /**
+     * Metodo inizializza, si occupa di inizializzare tutte le risorse necessarie al programma.
+     */
     public void inizializza() {
         inizializzaServerInterno();
         try {
@@ -41,6 +48,9 @@ public class Model {
         }
     }
 
+    /**
+     * Metodo inizializzaServerInterno, si occupa di avviare il servono interno per gestire i messaggi.
+     */
     private void inizializzaServerInterno() {
         chatServer = new Chat();
         chatServer.setDaemon(true);
@@ -66,10 +76,25 @@ public class Model {
         return risposta;
     }
 
-    public void inviaMessaggio(Utente mittente, Utente destinatario, MessageThread messageThread) {
-        // TODO: Send message
+    /**
+     * Metodo inviaMessaggio, si occupa della gestione dell'invio dei messaggi.
+     * @param contenuto rappresenta il contenuto del mesaggio da inviare.
+     * @return 0 se va tutto a buon fine, altrimenti 1
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    public int inviaMessaggio(String contenuto) throws ExecutionException, InterruptedException {
+        messaggio = new Messaggio(contenuto);
+        messaggio.setMittente(utente);
+        messaggio.setDestinatario(destinatario);
 
+        messaggioCallable = new MessaggioCallable(messaggio);
+        future = executorService.submit(messaggioCallable);
+
+        risposta = future.get();
         System.out.println("Messaggio inviato.");
+
+        return risposta.getRisultatoRisposta();
     }
 
     public List<Utente> getUtenti() throws ExecutionException, InterruptedException {
@@ -83,6 +108,8 @@ public class Model {
 
         // long endTime = System.nanoTime();
         // System.out.println(endTime - starTime);
+        risposta.getUtenti().remove(utente);
+
         return risposta.getUtenti();
     }
 

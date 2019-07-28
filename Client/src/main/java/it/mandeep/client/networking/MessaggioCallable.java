@@ -1,5 +1,7 @@
 package it.mandeep.client.networking;
 
+import it.mandeep.libreria.datastructures.Indirizzo;
+import it.mandeep.libreria.datastructures.Messaggio;
 import it.mandeep.libreria.network.richiesta.Richiesta;
 import it.mandeep.libreria.network.risposta.Risposta;
 
@@ -7,35 +9,31 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.concurrent.Callable;
 
-/**
- * La classe {@code RequestThread} serve per potersi connettere al server o ad un altro client per inviare richieste.
- */
-public class RequestThread extends Thread {
+// TODO: Cercare di unire le classi MessaggioCallable e RichiestaCallable utilizzando i generics
 
-    private Socket server = null;
-    private ObjectOutputStream out = null;
-    private ObjectInputStream in = null;
-    private Risposta risposta = null;
-    private Richiesta richiesta;
+public class MessaggioCallable implements Callable<Risposta> {
 
-    /**
-     * Costruttore che inizializza la richieta.
-     * @param richiesta {@code Richiesta} che sarà inviata.
-     */
-    public RequestThread(Richiesta richiesta) {
-        this.richiesta = richiesta;
+    private Socket server;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
+    private Risposta risposta;
+    private Messaggio messaggio;
+
+    public MessaggioCallable(Messaggio messaggio) {
+        this.messaggio = messaggio;
     }
 
     @Override
-    public void run() {
+    public Risposta call() throws Exception {
         try {
-            server = new Socket(Adress.IP, Adress.port);
+            server = new Socket(messaggio.getDestinatario().getAdress(), Adress.clientConnectionPort);
 
             out = new ObjectOutputStream(server.getOutputStream());
             in = new ObjectInputStream(server.getInputStream());
 
-            out.writeObject(richiesta);
+            out.writeObject(messaggio);
             risposta = (Risposta) in.readObject();
         } catch (IOException ex) {
             System.err.println("Errore durante la connessione al server.. " + ex.getMessage());
@@ -50,10 +48,6 @@ public class RequestThread extends Thread {
                 System.err.println("Errore durante la chiusera della connessione: " + ex.getMessage());
             }
         }
-
-    }
-
-    public Risposta getRisposta() {
         return risposta;
     }
 }

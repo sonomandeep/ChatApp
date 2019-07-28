@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 public interface RichiestaBuilder extends Serializable {
     RichiestaBuilder buildTipoRichiesta(TipoRichiesta tipoRichiesta);
-    RichiestaBuilder buildMessaggio(Messaggio messaggio);
     RichiestaBuilder buildMittente(Utente mittente);
     RichiestaBuilder buildDestinatario(Utente destinatario);
     Richiesta build();

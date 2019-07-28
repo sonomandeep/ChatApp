@@ -17,7 +17,6 @@ public class ChatHandler extends Thread {
     private Socket client;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    private Richiesta richeesta;
     private Risposta risposta;
     private Messaggio messaggio;
 
@@ -43,9 +42,9 @@ public class ChatHandler extends Thread {
         }
 
         try {
-            richeesta = (Richiesta) in.readObject();
+            messaggio = (Messaggio) in.readObject();
             System.out.println(String.format("L'utente %s ha inviato un messaggio: \n %s.",
-                    richeesta.getMittente().getUsername(), richeesta.getMessaggio().getContenuto()));
+                    messaggio.getMittente().getUsername(), messaggio.getContenuto()));
             risposta = new Risposta(0);
             out.writeObject(risposta);
         } catch (IOException ex) {
