@@ -41,11 +41,6 @@ public class Model {
      */
     public void inizializza() {
         inizializzaServerInterno();
-        try {
-            utenti = getUtenti();
-        } catch (ExecutionException | InterruptedException e) {
-            System.err.println("Errore durante la lettura degli utenti.. " + e.getMessage());
-        }
     }
 
     /**
@@ -98,17 +93,11 @@ public class Model {
     }
 
     public List<Utente> getUtenti() throws ExecutionException, InterruptedException {
-        richiesta = richiestaBuilder.buildTipoRichiesta(TipoRichiesta.GET_ALL_USERS).build();
+        richiesta = richiestaBuilder.buildTipoRichiesta(TipoRichiesta.GET_ALL_USERS).buildMittente(utente).build();
         richiestaCallable = new RichiestaCallable(richiesta);
-
-        // long starTime = System.nanoTime();
 
         future = executorService.submit(richiestaCallable);
         risposta = future.get();
-
-        // long endTime = System.nanoTime();
-        // System.out.println(endTime - starTime);
-        risposta.getUtenti().remove(utente);
 
         return risposta.getUtenti();
     }

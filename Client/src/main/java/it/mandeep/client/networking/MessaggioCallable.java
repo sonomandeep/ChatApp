@@ -1,8 +1,6 @@
 package it.mandeep.client.networking;
 
-import it.mandeep.libreria.datastructures.Indirizzo;
 import it.mandeep.libreria.datastructures.Messaggio;
-import it.mandeep.libreria.network.richiesta.Richiesta;
 import it.mandeep.libreria.network.risposta.Risposta;
 
 import java.io.IOException;

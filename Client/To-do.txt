@@ -41,3 +41,6 @@
         - Ogni volta che ricevo un messaggio lo aggiungo alla lista
         - Implemento un qualche tipo di listener che ogni volta che viene cambiato il contenuto della lista crea un evento
         - Gestisco l'evento ed aggiungo il messaggio alla textarea.
+
+5. Rendere il programma robusto
+    a. Gestire le eccezioni sul client nel caso il server non sia accesso.
